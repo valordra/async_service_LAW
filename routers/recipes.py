@@ -1,4 +1,3 @@
-from celery import group
 from fastapi import APIRouter
 from starlette.responses import JSONResponse
 

@@ -1,5 +1,5 @@
 import os
-from functools import lru_cache
+
 from kombu import Queue
 
 
@@ -18,9 +18,6 @@ class BaseConfig:
         # default queue
         Queue("celery"),
         # custom queue
-        Queue("universities"),
-        Queue("university"),
-
         Queue("recipes"),
     ]
 
@@ -29,16 +26,3 @@ class BaseConfig:
 
 class DevelopmentConfig(BaseConfig):
     pass
-
-
-@lru_cache()
-def get_settings():
-    config_cls_dict = {
-        "development": DevelopmentConfig,
-    }
-    config_name = os.environ.get("CELERY_CONFIG_MODULE", "development")
-    config_cls = config_cls_dict[config_name]
-    return config_cls()
-
-
-settings = get_settings()
